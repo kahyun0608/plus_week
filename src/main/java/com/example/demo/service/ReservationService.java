@@ -33,7 +33,7 @@ public class ReservationService {
         this.userRepository = userRepository;
         this.rentalLogService = rentalLogService;
     }
-
+    @Transactional
     // TODO: 1. 트랜잭션 이해
     public void createReservation(Long itemId, Long userId, LocalDateTime startAt, LocalDateTime endAt) {
         // 쉽게 데이터를 생성하려면 아래 유효성검사 주석 처리
