@@ -53,20 +53,7 @@ public class ReservationService {
 
     // TODO: 3. N+1 문제
     public List<ReservationResponseDto> getReservations() {
-        List<Reservation> reservations = reservationRepository.findAll();
-
-        return reservations.stream().map(reservation -> {
-            User user = reservation.getUser();
-            Item item = reservation.getItem();
-
-            return new ReservationResponseDto(
-                    reservation.getId(),
-                    user.getNickname(),
-                    item.getName(),
-                    reservation.getStartAt(),
-                    reservation.getEndAt()
-            );
-        }).toList();
+        return reservationRepository.findAllDto();
     }
 
     // TODO: 5. QueryDSL 검색 개선

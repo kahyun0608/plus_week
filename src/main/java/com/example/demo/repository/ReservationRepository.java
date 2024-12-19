@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.dto.ReservationResponseDto;
 import com.example.demo.entity.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +19,11 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findByUserId(Long userId);
 
     List<Reservation> findByItemId(Long itemId);
+
+    @Query("SELECT new com.example.demo.dto.ReservationResponseDto(r.id, u.nickname, i.name, r.startAt, r.endAt) FROM Reservation r " +
+            "JOIN r.user u " +
+            "JOIN r.item i ")
+    List<ReservationResponseDto> findAllDto();
 
     @Query("SELECT r FROM Reservation r " +
             "WHERE r.item.id = :id " +
